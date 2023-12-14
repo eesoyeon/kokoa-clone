@@ -21,11 +21,23 @@
   top: 20px;
 }
 
+@keyframes fadeIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .main-chat {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
+  animation: fadeIn 1s linear forwards;
 }
 
 .chat__timestamp {
@@ -38,17 +50,17 @@
   margin-bottom: 20px;
 }
 
+.message-row {
+  width: 100%;
+  display: flex;
+  margin-bottom: 25px;
+}
+
 .message-row img {
   width: 60px;
   height: 60px;
   border-radius: 40%;
   margin-right: 10px;
-}
-
-.message-row {
-  width: 100%;
-  display: flex;
-  margin-bottom: 25px;
 }
 
 .message__author {
@@ -105,6 +117,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 8px 15px;
+  transition: all 0.3s ease-in-out;
 }
 
 .reply .reply__column:first-child {
@@ -120,12 +133,13 @@
   opacity: 0.5;
 }
 
-.reply__column input {
+.reply input {
   width: 100%;
   box-sizing: border-box;
   border-radius: 25px;
   padding: 14px;
   border: var(--main-border);
+  transition: all 0.3s ease-in-out;
 }
 
 .reply__column button {
@@ -155,4 +169,26 @@
 .reply__column button:focus,
 .reply__column button:active {
   outline: none;
+}
+
+.reply .reply__column:first-child,
+.reply .fa-smile-wink,
+.reply button {
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* focus-within: 내부적으로 focus된 element가 있는지 */
+.reply:focus-within .reply__column:first-child,
+.reply:focus-within .fa-smile-wink,
+.reply:focus-within button {
+  opacity: 0;
+}
+
+.reply:focus-within input {
+  width: 98vw;
+  transform: translateX(-12%) translateY(-80px);
+}
+
+.reply:focus-within {
+  transform: translateY(80px);
 }
